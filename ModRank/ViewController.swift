@@ -9,7 +9,10 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    //MARK: Properties
+    @IBOutlet weak var modIDField: UITextField!
+    @IBOutlet weak var modIDLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -20,6 +23,10 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+    //MARK: Actions
+    @IBAction func addModID(_ sender: UIButton) {
+        modIDLabel.text = modIDField.text
+    }
+    
 }
 
