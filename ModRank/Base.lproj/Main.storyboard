@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ZNj-nK-4MY">
-                                <rect key="frame" x="0.0" y="40" width="375" height="96.5"/>
+                                <rect key="frame" x="0.0" y="40" width="375" height="424.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a tracked mod:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RtF-6P-sGu">
                                         <rect key="frame" x="113" y="0.0" width="149.5" height="20.5"/>
@@ -39,6 +40,16 @@
                                             <action selector="addModID:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LTn-R2-Pno"/>
                                         </connections>
                                     </button>
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="320" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="RZq-8T-ETS">
+                                        <rect key="frame" x="27.5" y="104.5" width="320" height="320"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="RZq-8T-ETS" secondAttribute="height" multiplier="1:1" id="IJb-nb-cgl"/>
+                                        </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="bid-jx-r8G" appends="YES" id="BXf-FM-oy9"/>
+                                        </connections>
+                                    </imageView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="c0C-QA-szR" firstAttribute="leading" secondItem="ZNj-nK-4MY" secondAttribute="leading" constant="15" id="Okn-0z-XZK"/>
@@ -57,11 +68,20 @@
                     <connections>
                         <outlet property="modIDField" destination="c0C-QA-szR" id="Z1Y-ul-qip"/>
                         <outlet property="modIDLabel" destination="RtF-6P-sGu" id="9YE-uR-mh8"/>
+                        <outlet property="modImage" destination="RZq-8T-ETS" id="hmX-9p-Cae"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="bid-jx-r8G">
+                    <connections>
+                        <action selector="changeImage:" destination="BYZ-38-t0r" id="brY-6g-Cjx"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="defaultPhoto" width="320" height="320"/>
+    </resources>
 </document>
