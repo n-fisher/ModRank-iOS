@@ -9,22 +9,19 @@
 import UIKit
 
 class PercentagesView: UIStackView {
-    
+
     //MARK: Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupPercentages()
-        
     }
     
     required init(coder: NSCoder) {
         super.init(coder: coder)
-        setupPercentages()
     }
     
     //MARK: Private Methods
-    private func setupPercentages() {
-        for i in ["favs", "subs", "views", "comments", "unsubscribes"] {
+    public func updatePercentages(favs: Float, views: Float, unsubs: Float, subs: Float, comments: Float) {
+        for i in [favs, subs, views, comments, unsubs] {
             // Create the label
             let percent = UILabel()
             
@@ -32,7 +29,7 @@ class PercentagesView: UIStackView {
             percent.heightAnchor.constraint(equalToConstant: 44.0).isActive = true
             percent.widthAnchor.constraint(equalToConstant: 44.0).isActive = true
             percent.adjustsFontSizeToFitWidth = true
-            percent.text = i
+            percent.text = String(format: "%@%", i)
             
             // Add the percent to the stack
             addArrangedSubview(percent)

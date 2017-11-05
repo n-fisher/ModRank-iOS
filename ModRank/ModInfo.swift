@@ -19,7 +19,7 @@ class ModInfo {
     var favs: Int
     var views: Int
     var unsubscribes: Int
-    var img: String
+    var img: UIImage?
     var favsRank: Int
     var favsPercent: Float
     var subsRank: Int
@@ -33,7 +33,7 @@ class ModInfo {
     
     //MARK: Initialization
     init(title: String, id: Int, itemTitle: String, comments: Int, subs: Int,
-         favs: Int, views: Int, unsubscribes: Int, img: String, favsRank: Int,
+         favs: Int, views: Int, unsubscribes: Int, img: UIImage?, favsRank: Int,
          favsPercent: Float, subsRank: Int, subsPercent: Float, unsubscribesRank: Int,
          unsubscribesPercent: Float, viewsRank: Int, viewsPercent: Float,
          commentsRank: Int, commentsPercent: Float) {

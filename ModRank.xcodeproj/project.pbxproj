@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		015335151FAFB07200557474 /* ModInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015335141FAFB07200557474 /* ModInfoTableViewController.swift */; };
 		01B745411FAF86E50054318F /* ModInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B745401FAF86E50054318F /* ModInfo.swift */; };
 		01B745431FAF8E730054318F /* ModInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B745421FAF8E730054318F /* ModInfoTableViewCell.swift */; };
 		01B745451FAF98370054318F /* PercentagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B745441FAF98370054318F /* PercentagesView.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		015335141FAFB07200557474 /* ModInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModInfoTableViewController.swift; sourceTree = "<group>"; };
 		01B745401FAF86E50054318F /* ModInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModInfo.swift; sourceTree = "<group>"; };
 		01B745421FAF8E730054318F /* ModInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModInfoTableViewCell.swift; sourceTree = "<group>"; };
 		01B745441FAF98370054318F /* PercentagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PercentagesView.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				01F88B3D1FAE871000FAF8CC /* ViewController.swift */,
 				01B745421FAF8E730054318F /* ModInfoTableViewCell.swift */,
 				01F88B3F1FAE871000FAF8CC /* Main.storyboard */,
+				015335141FAFB07200557474 /* ModInfoTableViewController.swift */,
 				01F88B421FAE871000FAF8CC /* Assets.xcassets */,
 				01F88B441FAE871000FAF8CC /* LaunchScreen.storyboard */,
 				01F88B471FAE871000FAF8CC /* Info.plist */,
@@ -212,6 +215,7 @@
 				01B745431FAF8E730054318F /* ModInfoTableViewCell.swift in Sources */,
 				01F88B3E1FAE871000FAF8CC /* ViewController.swift in Sources */,
 				01B745411FAF86E50054318F /* ModInfo.swift in Sources */,
+				015335151FAFB07200557474 /* ModInfoTableViewController.swift in Sources */,
 				01F88B3C1FAE871000FAF8CC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

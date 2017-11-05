@@ -12,6 +12,8 @@ class ModInfoTableViewCell: UITableViewCell {
 
     //MARK: Properties
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var modImage: UIImageView!
+    @IBOutlet weak var percentagesStack: PercentagesView!
     
     
     override func awakeFromNib() {
@@ -24,5 +26,9 @@ class ModInfoTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    @IBAction func deleteButton(_ sender: UIButton) {
+        self.delete(sender)
+    }
+    
 }
