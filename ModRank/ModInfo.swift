@@ -41,8 +41,8 @@ class ModInfo: NSObject, NSCoding {
     var subs: Int
     var favs: Int
     var views: Int
-    var unsubscribes: Int
-    var img: UIImage?
+    var unsubscribes: Float
+    var img: NSData
     var favsRank: Int
     var favsPercent: Float
     var subsRank: Int
@@ -58,15 +58,15 @@ class ModInfo: NSObject, NSCoding {
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
     static let ArchiveURL = DocumentsDirectory.appendingPathComponent("mods")
     
-    //MARK: Initialization
+    
     init(title: String, id: Int, itemTitle: String, comments: Int, subs: Int,
-         favs: Int, views: Int, unsubscribes: Int, img: UIImage?, favsRank: Int,
+         favs: Int, views: Int, unsubscribes: Float, img: NSData, favsRank: Int,
          favsPercent: Float, subsRank: Int, subsPercent: Float, unsubscribesRank: Int,
          unsubscribesPercent: Float, viewsRank: Int, viewsPercent: Float,
          commentsRank: Int, commentsPercent: Float) {
         self.title = title;
         self.id = id;
-        self.itemTitle = title;
+        self.itemTitle = itemTitle;
         self.comments = comments;
         self.subs = subs;
         self.favs = favs;
@@ -87,24 +87,24 @@ class ModInfo: NSObject, NSCoding {
     
     required convenience init?(coder aDecoder: NSCoder) {
         self.init(title: aDecoder.decodeObject(forKey: PropertyKey.title) as! String,
-                  id: aDecoder.decodeObject(forKey: PropertyKey.id) as! Int,
+                  id: aDecoder.decodeInteger(forKey: PropertyKey.id),
                   itemTitle: aDecoder.decodeObject(forKey: PropertyKey.itemTitle) as! String,
-                  comments: aDecoder.decodeObject(forKey: PropertyKey.comments) as! Int,
-                  subs: aDecoder.decodeObject(forKey: PropertyKey.subs) as! Int,
-                  favs: aDecoder.decodeObject(forKey: PropertyKey.favs) as! Int,
-                  views: aDecoder.decodeObject(forKey: PropertyKey.views) as! Int,
-                  unsubscribes: aDecoder.decodeObject(forKey: PropertyKey.unsubscribes) as! Int,
-                  img: aDecoder.decodeObject(forKey: PropertyKey.img) as? UIImage,
-                  favsRank: aDecoder.decodeObject(forKey: PropertyKey.favsRank) as! Int,
-                  favsPercent: aDecoder.decodeObject(forKey: PropertyKey.favsPercent) as! Float,
-                  subsRank: aDecoder.decodeObject(forKey: PropertyKey.subsRank) as! Int,
-                  subsPercent: aDecoder.decodeObject(forKey: PropertyKey.subsPercent) as! Float,
-                  unsubscribesRank: aDecoder.decodeObject(forKey: PropertyKey.unsubscribesRank) as! Int,
-                  unsubscribesPercent: aDecoder.decodeObject(forKey: PropertyKey.unsubscribesPercent) as! Float,
-                  viewsRank: aDecoder.decodeObject(forKey: PropertyKey.viewsRank) as! Int,
-                  viewsPercent: aDecoder.decodeObject(forKey: PropertyKey.viewsPercent) as! Float,
-                  commentsRank: aDecoder.decodeObject(forKey: PropertyKey.commentsRank) as! Int,
-                  commentsPercent: aDecoder.decodeObject(forKey: PropertyKey.commentsPercent) as! Float)
+                  comments: aDecoder.decodeInteger(forKey: PropertyKey.comments),
+                  subs: aDecoder.decodeInteger(forKey: PropertyKey.subs),
+                  favs: aDecoder.decodeInteger(forKey: PropertyKey.favs),
+                  views: aDecoder.decodeInteger(forKey: PropertyKey.views),
+                  unsubscribes: aDecoder.decodeFloat(forKey: PropertyKey.unsubscribes),
+                  img: aDecoder.decodeObject(forKey: PropertyKey.img) as! NSData,
+                  favsRank: aDecoder.decodeInteger(forKey: PropertyKey.favsRank),
+                  favsPercent: aDecoder.decodeFloat(forKey: PropertyKey.favsPercent),
+                  subsRank: aDecoder.decodeInteger(forKey: PropertyKey.subsRank),
+                  subsPercent: aDecoder.decodeFloat(forKey: PropertyKey.subsPercent),
+                  unsubscribesRank: aDecoder.decodeInteger(forKey: PropertyKey.unsubscribesRank),
+                  unsubscribesPercent: aDecoder.decodeFloat(forKey: PropertyKey.unsubscribesPercent),
+                  viewsRank: aDecoder.decodeInteger(forKey: PropertyKey.viewsRank),
+                  viewsPercent: aDecoder.decodeFloat(forKey: PropertyKey.viewsPercent),
+                  commentsRank: aDecoder.decodeInteger(forKey: PropertyKey.commentsRank),
+                  commentsPercent: aDecoder.decodeFloat(forKey: PropertyKey.commentsPercent))
     }
     
     //MARK: NSCoding

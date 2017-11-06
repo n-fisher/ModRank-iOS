@@ -21,15 +21,36 @@ class PercentagesView: UIStackView {
     
     //MARK: Private Methods
     public func updatePercentages(favs: Float, views: Float, unsubs: Float, subs: Float, comments: Float) {
-        for i in [favs, subs, views, comments, unsubs] {
+        let labels =  ["Favorites", "Subscriptions", "Views", "Comments", "Unsubscriptions"]
+        let vals = [favs, subs, views, comments, unsubs]
+        
+        for s in arrangedSubviews {
+            removeArrangedSubview(s)
+        }
+        
+        for i in 0..<5 {
             // Create the label
             let percent = UILabel()
             
             // Add constraints
-            percent.heightAnchor.constraint(equalToConstant: 44.0).isActive = true
-            percent.widthAnchor.constraint(equalToConstant: 44.0).isActive = true
+            //percent.lineBreakMode = NSLineBreakMode.byWordWrapping
+            //percent.heightAnchor.constraint(equalToConstant: 88.0).isActive = true
+            //percent.widthAnchor.constraint(equalToConstant: 44.0).isActive = true
             percent.adjustsFontSizeToFitWidth = true
-            percent.text = String(format: "%.1f%%", i)
+            
+            percent.text = String(format: "%.1f%%", vals[i])
+            switch(vals[i]) {
+            case 0..<10:
+                percent.textColor = UIColor.cyan
+            case 10..<20:
+                percent.textColor = UIColor.blue
+            case 20..<35:
+                percent.textColor = UIColor.green
+            case 35..<60:
+                percent.textColor = UIColor.yellow
+            default:
+                percent.textColor = UIColor.red
+            }
             
             // Add the percent to the stack
             addArrangedSubview(percent)

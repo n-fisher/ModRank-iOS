@@ -10,10 +10,10 @@ import UIKit
 import os.log
 
 class ModInfoTableViewController: UITableViewController {
-
+    
     //MARK: Properties
     var mods = [ModInfo]()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,9 +24,14 @@ class ModInfoTableViewController: UITableViewController {
         
         if let savedMods = loadMods() {
             mods += savedMods
+            print("Loaded " + String(savedMods.count) + " mods")
         }
         else {
-            loadSampleMods()
+            os_log("Failed to load mods", log: OSLog.default, type: .error)
+        }
+        
+        if mods.count == 0 {
+            //loadSampleMods()
         }
     }
 
@@ -34,7 +39,7 @@ class ModInfoTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -54,7 +59,7 @@ class ModInfoTableViewController: UITableViewController {
         let mod = mods[indexPath.row]
         
         cell.titleLabel.text = mod.itemTitle
-        cell.modImage.image = mod.img
+        cell.modImage.image = UIImage(data: mod.img as Data)
         
         cell.percentagesStack.updatePercentages(favs: mod.favsPercent, views: mod.viewsPercent, unsubs:mod.unsubscribesPercent, subs: mod.subsPercent, comments: mod.commentsPercent)
         
@@ -106,7 +111,7 @@ class ModInfoTableViewController: UITableViewController {
             os_log("Adding a new mod.", log: OSLog.default, type: .debug)
             
         case "ShowDetail":
-            guard let modInfoDetailViewController = segue.destination as? ModInfoViewController else {
+            guard let modInfoDetailViewController = segue.destination as? UINavigationController else {
                 fatalError("Unexpected destination: \(segue.destination)")
             }
             
@@ -119,7 +124,7 @@ class ModInfoTableViewController: UITableViewController {
             }
             
             let selectedMod = mods[indexPath.row]
-            modInfoDetailViewController.modInfo = selectedMod
+            (modInfoDetailViewController.childViewControllers.first as! ModInfoViewController).modInfo = selectedMod
             
         default:
             fatalError("Unexpected Segue Identifier; \(segue.identifier ?? "null")")
@@ -142,27 +147,24 @@ class ModInfoTableViewController: UITableViewController {
                 mods.append(modInfo)
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
             }
-            saveMods()
         }
+        saveMods()
     }
     
     //MARK: Private Methods
-    private func loadSampleMods() {
-        let photo1 = UIImage(named: "Image1")
-        let photo2 = UIImage(named: "Image2")
-        let photo3 = UIImage(named: "Image3")
+    private func loadSampleMods() {        /*
+        let mod1 = ModInfo(title: "title1", id: 1, itemTitle: "itemtitle1", comments: 1, subs: 1, favs: 1, views: 1, unsubscribes: 1, img: "Image1", favsRank: 1, favsPercent: 61.0, subsRank: 1, subsPercent: 71.0, unsubscribesRank: 1, unsubscribesPercent: 1.0, viewsRank: 1, viewsPercent: 1.0, commentsRank: 1, commentsPercent: 1.0)
+        let mod2 = ModInfo(title: "title2", id: 2, itemTitle: "itemtitle2", comments: 2, subs: 2, favs: 2, views: 2, unsubscribes: 2, img: "Image2", favsRank: 2, favsPercent: 2.0, subsRank: 2, subsPercent: 20.0, unsubscribesRank: 200, unsubscribesPercent: 26.0, viewsRank: 32, viewsPercent: 42.0, commentsRank: 2, commentsPercent: 2.0)
+        let mod3 = ModInfo(title: "title3", id: 3, itemTitle: "itemtitle3", comments: 3, subs: 3, favs: 3, views: 3, unsubscribes: 3, img: "Image3", favsRank: 3, favsPercent: 13.0, subsRank: 3, subsPercent: 23.0, unsubscribesRank: 3, unsubscribesPercent: 33.0, viewsRank: 3, viewsPercent: 43.0, commentsRank: 3, commentsPercent: 53.0)
         
-        let mod1 = ModInfo(title: "title1", id: 1, itemTitle: "itemtitle1", comments: 1, subs: 1, favs: 1, views: 1, unsubscribes: 1, img: photo1, favsRank: 1, favsPercent: 1.0, subsRank: 1, subsPercent: 1.0, unsubscribesRank: 1, unsubscribesPercent: 1.0, viewsRank: 1, viewsPercent: 1.0, commentsRank: 1, commentsPercent: 1.0)
-        let mod2 = ModInfo(title: "title2", id: 2, itemTitle: "itemtitle2", comments: 2, subs: 2, favs: 2, views: 2, unsubscribes: 2, img: photo2, favsRank: 2, favsPercent: 2.0, subsRank: 2, subsPercent: 2.0, unsubscribesRank: 2, unsubscribesPercent: 2.0, viewsRank: 2, viewsPercent: 2.0, commentsRank: 2, commentsPercent: 2.0)
-        let mod3 = ModInfo(title: "title3", id: 3, itemTitle: "itemtitle3", comments: 3, subs: 3, favs: 3, views: 3, unsubscribes: 3, img: photo3, favsRank: 3, favsPercent: 3.0, subsRank: 3, subsPercent: 3.0, unsubscribesRank: 3, unsubscribesPercent: 3.0, viewsRank: 3, viewsPercent: 3.0, commentsRank: 3, commentsPercent: 3.0)
-        
-        mods += [mod1, mod2, mod3]
+        mods += [mod1, mod2, mod3]*/
     }
     
     private func saveMods() {
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(mods, toFile: ModInfo.ArchiveURL.path)
         if isSuccessfulSave {
             os_log("Mods successfully saved.", log: OSLog.default, type: .debug)
+            print(String(format: "(%d mods saved)", (loadMods()?.count)!))
         } else {
             os_log("Failed to save mods...", log: OSLog.default, type: .error)
         }
