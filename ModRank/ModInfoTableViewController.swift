@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 class ModInfoTableViewController: UITableViewController {
 
@@ -19,10 +20,14 @@ class ModInfoTableViewController: UITableViewController {
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        navigationItem.leftBarButtonItem = editButtonItem
         
-        loadSampleMods()
+        if let savedMods = loadMods() {
+            mods += savedMods
+        }
+        else {
+            loadSampleMods()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,24 +69,22 @@ class ModInfoTableViewController: UITableViewController {
     }
     */
 
-    /*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
+            mods.remove(at: indexPath.row)
+            saveMods()
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
 
-    /*
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+        mods.swapAt(fromIndexPath.item, to.item)
     }
-    */
 
     /*
     // Override to support conditional rearranging of the table view.
@@ -91,15 +94,57 @@ class ModInfoTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
+        super.prepare(for: segue, sender: sender)
+        
+        switch(segue.identifier ?? "") {
+            
+        case "AddItem":
+            os_log("Adding a new mod.", log: OSLog.default, type: .debug)
+            
+        case "ShowDetail":
+            guard let modInfoDetailViewController = segue.destination as? ModInfoViewController else {
+                fatalError("Unexpected destination: \(segue.destination)")
+            }
+            
+            guard let selectedModInfoCell = sender as? ModInfoTableViewCell else {
+                fatalError("Unexpected sender: \(sender ?? "null")")
+            }
+            
+            guard let indexPath = tableView.indexPath(for: selectedModInfoCell) else {
+                fatalError("The selected cell is not being displayed by the table")
+            }
+            
+            let selectedMod = mods[indexPath.row]
+            modInfoDetailViewController.modInfo = selectedMod
+            
+        default:
+            fatalError("Unexpected Segue Identifier; \(segue.identifier ?? "null")")
+        }
     }
-    */
+    
+    //MARK: Actions
+    @IBAction func unwindToModList(sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.source as? ModInfoViewController, let modInfo = sourceViewController.modInfo {
+            
+            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                // Update an existing mod.
+                mods[selectedIndexPath.row] = modInfo
+                tableView.reloadRows(at: [selectedIndexPath], with: .none)
+            }
+            else {
+                // Add a new mod.
+                let newIndexPath = IndexPath(row: mods.count, section: 0)
+                
+                mods.append(modInfo)
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
+            saveMods()
+        }
+    }
     
     //MARK: Private Methods
     private func loadSampleMods() {
@@ -112,5 +157,18 @@ class ModInfoTableViewController: UITableViewController {
         let mod3 = ModInfo(title: "title3", id: 3, itemTitle: "itemtitle3", comments: 3, subs: 3, favs: 3, views: 3, unsubscribes: 3, img: photo3, favsRank: 3, favsPercent: 3.0, subsRank: 3, subsPercent: 3.0, unsubscribesRank: 3, unsubscribesPercent: 3.0, viewsRank: 3, viewsPercent: 3.0, commentsRank: 3, commentsPercent: 3.0)
         
         mods += [mod1, mod2, mod3]
+    }
+    
+    private func saveMods() {
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(mods, toFile: ModInfo.ArchiveURL.path)
+        if isSuccessfulSave {
+            os_log("Mods successfully saved.", log: OSLog.default, type: .debug)
+        } else {
+            os_log("Failed to save mods...", log: OSLog.default, type: .error)
+        }
+    }
+    
+    private func loadMods() -> [ModInfo]?  {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: ModInfo.ArchiveURL.path) as? [ModInfo]
     }
 }

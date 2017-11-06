@@ -29,7 +29,7 @@ class PercentagesView: UIStackView {
             percent.heightAnchor.constraint(equalToConstant: 44.0).isActive = true
             percent.widthAnchor.constraint(equalToConstant: 44.0).isActive = true
             percent.adjustsFontSizeToFitWidth = true
-            percent.text = String(format: "%@%", i)
+            percent.text = String(format: "%.1f%%", i)
             
             // Add the percent to the stack
             addArrangedSubview(percent)
