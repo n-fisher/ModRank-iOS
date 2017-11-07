@@ -96,8 +96,8 @@
                                     <string>Title</string>
                                 </scopeButtonTitles>
                             </searchBar>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ZNj-nK-4MY">
-                                <rect key="frame" x="0.0" y="128" width="375" height="667"/>
+                            <stackView autoresizesSubviews="NO" opaque="NO" contentMode="top" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ZNj-nK-4MY">
+                                <rect key="frame" x="0.0" y="128" width="375" height="506"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VHe-Nw-gYu">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
@@ -121,14 +121,21 @@
                                             <outletCollection property="gestureRecognizers" destination="bid-jx-r8G" appends="YES" id="BXf-FM-oy9"/>
                                         </connections>
                                     </imageView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iQp-8e-evQ" customClass="PercentagesView" customModule="ModRank" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="386" width="375" height="281"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="iQp-8e-evQ" customClass="PercentagesView" customModule="ModRank" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="386" width="375" height="120"/>
+                                        <color key="backgroundColor" red="0.5956322862694301" green="0.5956322862694301" blue="0.5956322862694301" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="120" id="Cyq-z8-n99"/>
+                                            <constraint firstAttribute="width" constant="375" id="IWH-OK-1Qn"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="iQp-8e-evQ" firstAttribute="top" secondItem="RZq-8T-ETS" secondAttribute="bottom" constant="8" id="4DW-Lx-abN"/>
                                     <constraint firstItem="iQp-8e-evQ" firstAttribute="width" secondItem="ZNj-nK-4MY" secondAttribute="width" id="OR1-uw-jVY"/>
                                     <constraint firstItem="RZq-8T-ETS" firstAttribute="top" secondItem="VHe-Nw-gYu" secondAttribute="bottom" constant="8" id="ZEy-Gk-TbW"/>
+                                    <constraint firstAttribute="width" constant="375" id="kWQ-jz-aoH"/>
+                                    <constraint firstItem="iQp-8e-evQ" firstAttribute="centerX" secondItem="ZNj-nK-4MY" secondAttribute="centerX" id="ozg-CX-FIP"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -136,22 +143,9 @@
                         <constraints>
                             <constraint firstItem="ZNj-nK-4MY" firstAttribute="top" secondItem="GFZ-yJ-3Qa" secondAttribute="bottom" constant="8" id="0rF-6w-Y72"/>
                             <constraint firstItem="GFZ-yJ-3Qa" firstAttribute="centerX" secondItem="ZNj-nK-4MY" secondAttribute="centerX" id="295-TT-7sr"/>
-                            <constraint firstItem="GFZ-yJ-3Qa" firstAttribute="trailing" secondItem="ZNj-nK-4MY" secondAttribute="trailing" id="2Fd-WS-NxS"/>
                             <constraint firstItem="GFZ-yJ-3Qa" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Cf6-WV-xWJ"/>
-                            <constraint firstItem="GFZ-yJ-3Qa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Cv6-mm-Cs1"/>
-                            <constraint firstAttribute="trailing" secondItem="GFZ-yJ-3Qa" secondAttribute="trailing" id="M6k-OY-NR7"/>
-                            <constraint firstItem="GFZ-yJ-3Qa" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="MWk-Wl-ju8"/>
-                            <constraint firstItem="GFZ-yJ-3Qa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="NqP-ak-X4v"/>
-                            <constraint firstItem="GFZ-yJ-3Qa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Rpq-70-8iF"/>
                             <constraint firstItem="GFZ-yJ-3Qa" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cfN-rx-T5N"/>
-                            <constraint firstItem="GFZ-yJ-3Qa" firstAttribute="leading" secondItem="ZNj-nK-4MY" secondAttribute="leading" id="fWf-X2-GNo"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ZNj-nK-4MY" secondAttribute="trailing" id="ja0-5c-N0b"/>
                             <constraint firstItem="GFZ-yJ-3Qa" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="lIg-4a-FGG"/>
-                            <constraint firstItem="GFZ-yJ-3Qa" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="64" id="nDP-21-Ftv"/>
-                            <constraint firstItem="ZNj-nK-4MY" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="rTY-lW-eyy"/>
-                            <constraint firstItem="ZNj-nK-4MY" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="xRj-GW-2RQ"/>
-                            <constraint firstItem="GFZ-yJ-3Qa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="xYp-ob-zsY"/>
-                            <constraint firstItem="VHe-Nw-gYu" firstAttribute="top" secondItem="GFZ-yJ-3Qa" secondAttribute="bottom" constant="8" id="zHs-bX-8Bz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -170,6 +164,7 @@
                     <connections>
                         <outlet property="modImage" destination="RZq-8T-ETS" id="hmX-9p-Cae"/>
                         <outlet property="modTitle" destination="VHe-Nw-gYu" id="D38-mV-THn"/>
+                        <outlet property="percentagesView" destination="iQp-8e-evQ" id="szI-cz-PQL"/>
                         <outlet property="saveButton" destination="bsX-ZB-yxa" id="9BR-Le-aG4"/>
                         <outlet property="searchBar" destination="GFZ-yJ-3Qa" id="ezT-RN-lol"/>
                     </connections>
@@ -182,7 +177,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1670" y="134"/>
+            <point key="canvasLocation" x="1669.5999999999999" y="133.5832083958021"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YKo-j5-hhn">

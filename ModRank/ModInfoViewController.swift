@@ -15,6 +15,7 @@ class ModInfoViewController: UIViewController, UINavigationControllerDelegate, U
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var modTitle: UILabel!
+    @IBOutlet weak var percentagesView: PercentagesView!
     
     let url = "http://modranker-modrank.a3c1.starter-us-west-1.openshiftapps.com/api/items/:"
     
@@ -26,8 +27,7 @@ class ModInfoViewController: UIViewController, UINavigationControllerDelegate, U
         // Do any additional setup after loading the view, typically from a nib.
         
         if let modInfo = modInfo {
-            modTitle.text = modInfo.itemTitle
-            modImage.image = UIImage(data: modInfo.img as Data)
+            updateModInfo(mod: modInfo)
         }
         
         updateSaveButtonState()
@@ -150,6 +150,7 @@ class ModInfoViewController: UIViewController, UINavigationControllerDelegate, U
         self.modInfo = mod
         self.modImage.image = UIImage(data: modInfo?.img as! Data)
         self.modTitle.text = modInfo?.itemTitle
+        self.percentagesView.updatePercentages(favs: mod.favsPercent, views: mod.viewsPercent, unsubs: mod.unsubscribesPercent, subs: mod.subsPercent, comments: mod.commentsPercent)
         updateSaveButtonState()
     }
 }
