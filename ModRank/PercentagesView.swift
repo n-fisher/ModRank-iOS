@@ -42,10 +42,9 @@ class PercentagesView: UIStackView {
             percent.adjustsFontSizeToFitWidth = true
             stack.axis = UILayoutConstraintAxis.vertical
             
-            label.text = String(format: "%@", labels[i])
+            label.text = labels[i]
             percent.text = String(format: "%.1f%%", vals[i])
             
-            label.textColor = UIColor.black
             switch(vals[i]) {
             case 0..<10:
                 percent.textColor = UIColor.cyan

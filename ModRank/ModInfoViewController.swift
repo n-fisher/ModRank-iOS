@@ -44,8 +44,7 @@ class ModInfoViewController: UIViewController, UINavigationControllerDelegate, U
     }
     
     func searchBarSearchButtonClicked(_ bar: UISearchBar) {
-        self.currentID = Int(bar.text ?? "0")
-        loadFromAPI(id: self.currentID!)
+        loadFromAPI(id: bar.text!)
         searchBar.resignFirstResponder()
     }
     
@@ -74,8 +73,8 @@ class ModInfoViewController: UIViewController, UINavigationControllerDelegate, U
     }
     
     
-    private func loadFromAPI(id: Int) {
-        let req: String = url + String(id)
+    private func loadFromAPI(id: String) {
+        let req: String = url + id
         
         let session = URLSession(configuration: URLSessionConfiguration.default)
         
@@ -96,21 +95,9 @@ class ModInfoViewController: UIViewController, UINavigationControllerDelegate, U
                     return
                 }
                 
-                // print dictionary after serialization
-                print(jsonResponse!)
-                
-                // check high-level keys for collections
-                print()
-                for (key,value) in jsonResponse! {
-                    if value is [String:AnyObject] {
-                        print("\(key) is a Dictionary")
-                    }
-                    else if value is [AnyObject] {
-                        print("\(key) is an Array")
-                    }
+                guard jsonResponse?.first?.key != "error"
                     else {
-                        print(type(of: value))
-                    }
+                        return
                 }
                 
                 guard let imageData: NSData = NSData(contentsOf: URL.init(string: jsonResponse!["img"] as! String)!)
@@ -147,6 +134,7 @@ class ModInfoViewController: UIViewController, UINavigationControllerDelegate, U
     
     private func updateModInfo(mod: ModInfo)
     {
+        self.currentID = mod.id
         self.modInfo = mod
         self.modImage.image = UIImage(data: modInfo?.img as! Data)
         self.modTitle.text = modInfo?.itemTitle
