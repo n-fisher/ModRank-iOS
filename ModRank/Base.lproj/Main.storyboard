@@ -96,8 +96,14 @@
                                     <string>Title</string>
                                 </scopeButtonTitles>
                             </searchBar>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Search Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yun-oE-8gc">
+                                <rect key="frame" x="0.0" y="120" width="375" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.91301003886010368" green="0.0" blue="0.0090815503376475669" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <stackView autoresizesSubviews="NO" opaque="NO" contentMode="top" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ZNj-nK-4MY">
-                                <rect key="frame" x="0.0" y="128" width="375" height="506"/>
+                                <rect key="frame" x="0.0" y="148.5" width="375" height="506"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VHe-Nw-gYu">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
@@ -141,9 +147,12 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="ZNj-nK-4MY" firstAttribute="top" secondItem="GFZ-yJ-3Qa" secondAttribute="bottom" constant="8" id="0rF-6w-Y72"/>
+                            <constraint firstItem="ZNj-nK-4MY" firstAttribute="top" secondItem="yun-oE-8gc" secondAttribute="bottom" constant="8" symbolic="YES" id="0rF-6w-Y72"/>
                             <constraint firstItem="GFZ-yJ-3Qa" firstAttribute="centerX" secondItem="ZNj-nK-4MY" secondAttribute="centerX" id="295-TT-7sr"/>
+                            <constraint firstItem="yun-oE-8gc" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="BNZ-Ht-h7H"/>
                             <constraint firstItem="GFZ-yJ-3Qa" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Cf6-WV-xWJ"/>
+                            <constraint firstItem="yun-oE-8gc" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="RiX-tw-mkl"/>
+                            <constraint firstItem="yun-oE-8gc" firstAttribute="top" secondItem="GFZ-yJ-3Qa" secondAttribute="bottom" id="bWh-Va-jUI"/>
                             <constraint firstItem="GFZ-yJ-3Qa" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cfN-rx-T5N"/>
                             <constraint firstItem="GFZ-yJ-3Qa" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="lIg-4a-FGG"/>
                         </constraints>
@@ -167,6 +176,7 @@
                         <outlet property="percentagesView" destination="iQp-8e-evQ" id="szI-cz-PQL"/>
                         <outlet property="saveButton" destination="bsX-ZB-yxa" id="9BR-Le-aG4"/>
                         <outlet property="searchBar" destination="GFZ-yJ-3Qa" id="ezT-RN-lol"/>
+                        <outlet property="searchResults" destination="yun-oE-8gc" id="Vaz-If-3tH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

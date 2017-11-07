@@ -12,6 +12,7 @@ import os.log
 class ModInfoViewController: UIViewController, UINavigationControllerDelegate, UISearchBarDelegate {
     //MARK: Properties
     @IBOutlet weak var modImage: UIImageView!
+    @IBOutlet weak var searchResults: UILabel!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var modTitle: UILabel!
@@ -26,14 +27,14 @@ class ModInfoViewController: UIViewController, UINavigationControllerDelegate, U
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        if let modInfo = modInfo {
-            updateModInfo(mod: modInfo)
+        if modInfo != nil {
+            updateDisplays()
         }
         
         updateSaveButtonState()
         searchBar.delegate = self
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -82,8 +83,10 @@ class ModInfoViewController: UIViewController, UINavigationControllerDelegate, U
         
         let task: URLSessionDataTask = session.dataTask(with: request) { (receivedData, response, error) -> Void in
             if let data = receivedData {
+                /*
                 let rawDataString = String(data: data, encoding: String.Encoding.utf8)
                 print(rawDataString!)
+                 */
                 
                 var jsonResponse : [String:AnyObject]?
                 
@@ -97,34 +100,41 @@ class ModInfoViewController: UIViewController, UINavigationControllerDelegate, U
                 
                 guard jsonResponse?.first?.key != "error"
                     else {
+                        self.showFail()
                         return
                 }
                 
-                guard let imageData: NSData = NSData(contentsOf: URL.init(string: jsonResponse!["img"] as! String)!)
+                var img: String? = jsonResponse!["img"] as? String
+
+                if img == nil || img!.isEmpty {
+                    img = "https://steamuserimages-a.akamaihd.net/ugc/100600869081028686/995C77B99B7EF5FE58BC696B0C70CB5999502F7C/"
+                }
+                
+                guard let imageData: NSData = NSData(contentsOf: URL(string: img!)!)
                     else {
                         return
                 }
                 
                 DispatchQueue.main.async {
                     self.updateModInfo(mod: ModInfo(title: jsonResponse!["title"] as! String,
-                                          id: jsonResponse!["id"] as! Int,
-                                          itemTitle: jsonResponse!["itemTitle"] as! String,
-                                          comments: jsonResponse!["comments"] as! Int,
-                                          subs: jsonResponse!["subs"] as! Int,
-                                          favs: jsonResponse!["favs"] as! Int,
-                                          views: jsonResponse!["views"] as! Int,
-                                          unsubscribes: jsonResponse!["unsubscribes"] as! Float,
-                                          img: imageData,
-                                          favsRank: jsonResponse!["favsRank"] as! Int,
-                                          favsPercent: (jsonResponse!["favsPercent"] as! NSString).floatValue,
-                                          subsRank: jsonResponse!["subsRank"] as! Int,
-                                          subsPercent: (jsonResponse!["subsPercent"] as! NSString).floatValue,
-                                          unsubscribesRank: jsonResponse!["unsubscribesRank"] as! Int,
-                                          unsubscribesPercent: (jsonResponse!["unsubscribesPercent"] as! NSString).floatValue,
-                                          viewsRank: jsonResponse!["viewsRank"] as! Int,
-                                          viewsPercent: (jsonResponse!["viewsPercent"] as! NSString).floatValue,
-                                          commentsRank: jsonResponse!["commentsRank"] as! Int,
-                                          commentsPercent: (jsonResponse!["commentsPercent"] as! NSString).floatValue))
+                                                    id: jsonResponse!["id"] as! Int,
+                                                    itemTitle: jsonResponse!["itemTitle"] as! String,
+                                                    comments: jsonResponse!["comments"] as! Int,
+                                                    subs: jsonResponse!["subs"] as! Int,
+                                                    favs: jsonResponse!["favs"] as! Int,
+                                                    views: jsonResponse!["views"] as! Int,
+                                                    unsubscribes: jsonResponse!["unsubscribes"] as! Float,
+                                                    img: imageData,
+                                                    favsRank: jsonResponse!["favsRank"] as! Int,
+                                                    favsPercent: (jsonResponse!["favsPercent"] as! NSString).floatValue,
+                                                    subsRank: jsonResponse!["subsRank"] as! Int,
+                                                    subsPercent: (jsonResponse!["subsPercent"] as! NSString).floatValue,
+                                                    unsubscribesRank: jsonResponse!["unsubscribesRank"] as! Int,
+                                                    unsubscribesPercent: (jsonResponse!["unsubscribesPercent"] as! NSString).floatValue,
+                                                    viewsRank: jsonResponse!["viewsRank"] as! Int,
+                                                    viewsPercent: (jsonResponse!["viewsPercent"] as! NSString).floatValue,
+                                                    commentsRank: jsonResponse!["commentsRank"] as! Int,
+                                                    commentsPercent: (jsonResponse!["commentsPercent"] as! NSString).floatValue))
                 }
             }
         }
@@ -136,10 +146,22 @@ class ModInfoViewController: UIViewController, UINavigationControllerDelegate, U
     {
         self.currentID = mod.id
         self.modInfo = mod
+        updateDisplays()
+    }
+    
+    private func updateDisplays() {
         self.modImage.image = UIImage(data: modInfo?.img as! Data)
         self.modTitle.text = modInfo?.itemTitle
-        self.percentagesView.updatePercentages(favs: mod.favsPercent, views: mod.viewsPercent, unsubs: mod.unsubscribesPercent, subs: mod.subsPercent, comments: mod.commentsPercent)
+        self.percentagesView.updatePercentages(favs: modInfo!.favsPercent, views: modInfo!.viewsPercent, unsubs: modInfo!.unsubscribesPercent, subs: modInfo!.subsPercent, comments: modInfo!.commentsPercent)
         updateSaveButtonState()
+    }
+    
+    private func showFail() {
+        DispatchQueue.main.async {
+            self.searchResults.isHidden = false
+            Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false,
+                                 block: {_ in DispatchQueue.main.async { self.searchResults.isHidden = true}})
+        }
     }
 }
 
