@@ -25,7 +25,7 @@ class PercentagesView: UIStackView {
         let vals = [favs, subs, views, comments, unsubs]
         
         for s in arrangedSubviews {
-            removeArrangedSubview(s)
+            s.removeFromSuperview()
         }
         
         for i in 0..<5 {
