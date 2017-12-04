@@ -20,7 +20,7 @@ class PercentagesView: UIStackView {
     }
     
     //MARK: Private Methods
-    public func updatePercentages(favs: Float, views: Float, unsubs: Float, subs: Float, comments: Float) {
+    public func refresh(favs: Float, views: Float, unsubs: Float, subs: Float, comments: Float) {
         let labels =  ["⭐️", "💾", "👁", "🗨", "X"]
         let vals = [favs, subs, views, comments, unsubs]
         

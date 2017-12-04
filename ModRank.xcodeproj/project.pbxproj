@@ -17,6 +17,8 @@
 		01F88B431FAE871000FAF8CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01F88B421FAE871000FAF8CC /* Assets.xcassets */; };
 		01F88B461FAE871000FAF8CC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01F88B441FAE871000FAF8CC /* LaunchScreen.storyboard */; };
 		01F88B511FAE871000FAF8CC /* ModRankTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F88B501FAE871000FAF8CC /* ModRankTests.swift */; };
+		A7806EFE7C79A5926CC9FB69 /* Pods_ModRank.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C6226F141144876F92544C9 /* Pods_ModRank.framework */; };
+		EC418DA9E4081F58EF440E31 /* Pods_ModRankTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB3A0335F7B74763534BED39 /* Pods_ModRankTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,12 @@
 		01F88B4C1FAE871000FAF8CC /* ModRankTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ModRankTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		01F88B501FAE871000FAF8CC /* ModRankTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModRankTests.swift; sourceTree = "<group>"; };
 		01F88B521FAE871000FAF8CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1EA1F153A696CC2EABAFF72C /* Pods-ModRank.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ModRank.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ModRank/Pods-ModRank.debug.xcconfig"; sourceTree = "<group>"; };
+		4916007B7E47936225703C39 /* Pods-ModRankTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ModRankTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ModRankTests/Pods-ModRankTests.release.xcconfig"; sourceTree = "<group>"; };
+		65988EDD9C30958CFEC9797E /* Pods-ModRankTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ModRankTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ModRankTests/Pods-ModRankTests.debug.xcconfig"; sourceTree = "<group>"; };
+		78F9B4ED7CFDA3B17C3489FD /* Pods-ModRank.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ModRank.release.xcconfig"; path = "Pods/Target Support Files/Pods-ModRank/Pods-ModRank.release.xcconfig"; sourceTree = "<group>"; };
+		8C6226F141144876F92544C9 /* Pods_ModRank.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ModRank.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB3A0335F7B74763534BED39 /* Pods_ModRankTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ModRankTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7806EFE7C79A5926CC9FB69 /* Pods_ModRank.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC418DA9E4081F58EF440E31 /* Pods_ModRankTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +80,8 @@
 				01F88B3A1FAE871000FAF8CC /* ModRank */,
 				01F88B4F1FAE871000FAF8CC /* ModRankTests */,
 				01F88B391FAE871000FAF8CC /* Products */,
+				F1555CB06A4941E9F3E1E19D /* Pods */,
+				8CE83A604EA53989C8C19A5F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -108,6 +120,26 @@
 			path = ModRankTests;
 			sourceTree = "<group>";
 		};
+		8CE83A604EA53989C8C19A5F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8C6226F141144876F92544C9 /* Pods_ModRank.framework */,
+				EB3A0335F7B74763534BED39 /* Pods_ModRankTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F1555CB06A4941E9F3E1E19D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1EA1F153A696CC2EABAFF72C /* Pods-ModRank.debug.xcconfig */,
+				78F9B4ED7CFDA3B17C3489FD /* Pods-ModRank.release.xcconfig */,
+				65988EDD9C30958CFEC9797E /* Pods-ModRankTests.debug.xcconfig */,
+				4916007B7E47936225703C39 /* Pods-ModRankTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -115,9 +147,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 01F88B551FAE871000FAF8CC /* Build configuration list for PBXNativeTarget "ModRank" */;
 			buildPhases = (
+				0F123D5617FDDB6054F755CA /* [CP] Check Pods Manifest.lock */,
 				01F88B341FAE871000FAF8CC /* Sources */,
 				01F88B351FAE871000FAF8CC /* Frameworks */,
 				01F88B361FAE871000FAF8CC /* Resources */,
+				72A3179BF1BE1CB2B303C4A8 /* [CP] Embed Pods Frameworks */,
+				56A60476E01BB846D187C2D8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -132,9 +167,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 01F88B581FAE871000FAF8CC /* Build configuration list for PBXNativeTarget "ModRankTests" */;
 			buildPhases = (
+				31727CCB6CFC91B32632D186 /* [CP] Check Pods Manifest.lock */,
 				01F88B481FAE871000FAF8CC /* Sources */,
 				01F88B491FAE871000FAF8CC /* Frameworks */,
 				01F88B4A1FAE871000FAF8CC /* Resources */,
+				1DF3657AB953A52716137828 /* [CP] Embed Pods Frameworks */,
+				933E8614266898AD04883A94 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -205,6 +243,108 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0F123D5617FDDB6054F755CA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ModRank-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1DF3657AB953A52716137828 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ModRankTests/Pods-ModRankTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		31727CCB6CFC91B32632D186 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ModRankTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		56A60476E01BB846D187C2D8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ModRank/Pods-ModRank-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		72A3179BF1BE1CB2B303C4A8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ModRank/Pods-ModRank-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ModRank/Pods-ModRank-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		933E8614266898AD04883A94 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ModRankTests/Pods-ModRankTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		01F88B341FAE871000FAF8CC /* Sources */ = {
@@ -367,6 +507,7 @@
 		};
 		01F88B561FAE871000FAF8CC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1EA1F153A696CC2EABAFF72C /* Pods-ModRank.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -381,6 +522,7 @@
 		};
 		01F88B571FAE871000FAF8CC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 78F9B4ED7CFDA3B17C3489FD /* Pods-ModRank.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -395,6 +537,7 @@
 		};
 		01F88B591FAE871000FAF8CC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 65988EDD9C30958CFEC9797E /* Pods-ModRankTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -411,6 +554,7 @@
 		};
 		01F88B5A1FAE871000FAF8CC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4916007B7E47936225703C39 /* Pods-ModRankTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

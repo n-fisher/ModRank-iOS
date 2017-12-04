@@ -8,6 +8,7 @@
 
 import UIKit
 import os.log
+import Charts
 
 class ModInfoViewController: UIViewController, UINavigationControllerDelegate, UISearchBarDelegate {
     //MARK: Properties
@@ -163,9 +164,13 @@ class ModInfoViewController: UIViewController, UINavigationControllerDelegate, U
     }
     
     private func updateDisplays() {
-        self.modImage.image = UIImage(data: modInfo?.img as! Data)
+        guard let info = modInfo
+            else {
+                return
+        }
+        self.modImage.image = UIImage(data: info.img as Data)
         self.modTitle.text = modInfo?.itemTitle
-        self.percentagesView.updatePercentages(favs: modInfo!.favsPercent, views: modInfo!.viewsPercent, unsubs: modInfo!.unsubscribesPercent, subs: modInfo!.subsPercent, comments: modInfo!.commentsPercent)
+        self.percentagesView.refresh(favs: info.favsPercent, views: info.viewsPercent, unsubs: info.unsubscribesPercent, subs: info.subsPercent, comments: info.commentsPercent)
         updateSaveButtonState()
     }
     
@@ -175,7 +180,7 @@ class ModInfoViewController: UIViewController, UINavigationControllerDelegate, U
     
     private func showFail(response: String?) {
         DispatchQueue.main.async {
-            print(response)
+            print(response ?? "Search error")
             self.searchResults.text = response// ? "ID not found" : "Search error"
             self.searchResults.isHidden = false
             Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false,

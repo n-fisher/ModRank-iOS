@@ -61,7 +61,7 @@ class ModInfoTableViewController: UITableViewController {
         cell.titleLabel.text = mod.itemTitle
         cell.modImage.image = UIImage(data: mod.img as Data)
         
-        cell.percentagesStack.updatePercentages(favs: mod.favsPercent, views: mod.viewsPercent, unsubs:mod.unsubscribesPercent, subs: mod.subsPercent, comments: mod.commentsPercent)
+        cell.percentagesStack.refresh(favs: mod.favsPercent, views: mod.viewsPercent, unsubs:mod.unsubscribesPercent, subs: mod.subsPercent, comments: mod.commentsPercent)
         
         return cell
     }
