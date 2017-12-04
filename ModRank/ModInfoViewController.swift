@@ -91,16 +91,27 @@ class ModInfoViewController: UIViewController, UINavigationControllerDelegate, U
                 var jsonResponse : [String:AnyObject]?
                 
                 do {
-                    jsonResponse = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) as? [String:AnyObject]
+                    jsonResponse = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) as? [String: AnyObject]
                 }
                 catch {
-                    print("Caught exception")
+                    self.showFail(response: "Caught exception")
                     return
                 }
                 
-                guard jsonResponse?.first?.key != "error"
+                guard let err = jsonResponse?.first
                     else {
-                        self.showFail()
+                        self.showFail(response: "No response")
+                        return
+                }
+                
+                guard err.key != "error"
+                    else {
+                        if (err.value as! String).starts(with: "404") {
+                            self.show404Fail()
+                        }
+                        else {
+                           self.showFail(response: err.value as? String)
+                        }
                         return
                 }
                 
@@ -137,8 +148,10 @@ class ModInfoViewController: UIViewController, UINavigationControllerDelegate, U
                                                     commentsPercent: (jsonResponse!["commentsPercent"] as! NSString).floatValue))
                 }
             }
+            else {
+                self.showFail(response: "No connection")
+            }
         }
-        
         task.resume()
     }
     
@@ -156,8 +169,14 @@ class ModInfoViewController: UIViewController, UINavigationControllerDelegate, U
         updateSaveButtonState()
     }
     
-    private func showFail() {
+    private func show404Fail() {
+        showFail(response: "Item not found")
+    }
+    
+    private func showFail(response: String?) {
         DispatchQueue.main.async {
+            print(response)
+            self.searchResults.text = response// ? "ID not found" : "Search error"
             self.searchResults.isHidden = false
             Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false,
                                  block: {_ in DispatchQueue.main.async { self.searchResults.isHidden = true}})

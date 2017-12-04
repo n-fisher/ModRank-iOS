@@ -121,6 +121,7 @@ class ModInfo: NSObject, NSCoding {
         aCoder.encode(favsRank, forKey: PropertyKey.favsRank)
         aCoder.encode(favsPercent, forKey: PropertyKey.favsPercent)
         aCoder.encode(subsRank, forKey: PropertyKey.subsRank)
+        aCoder.encode(subsPercent, forKey: PropertyKey.subsPercent)
         aCoder.encode(unsubscribesRank, forKey: PropertyKey.unsubscribesRank)
         aCoder.encode(unsubscribesPercent, forKey: PropertyKey.unsubscribesPercent)
         aCoder.encode(viewsRank, forKey: PropertyKey.viewsRank)

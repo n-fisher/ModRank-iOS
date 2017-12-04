@@ -24,11 +24,11 @@ class PercentagesView: UIStackView {
         let labels =  ["⭐️", "💾", "👁", "🗨", "X"]
         let vals = [favs, subs, views, comments, unsubs]
         
-        for s in arrangedSubviews {
-            s.removeFromSuperview()
+        for subview in arrangedSubviews {
+            subview.removeFromSuperview()
         }
         
-        for i in 0..<5 {
+        for i in 0..<vals.count {
             // Create the label
             let stack = UIStackView()
             let label = UILabel()
@@ -40,7 +40,8 @@ class PercentagesView: UIStackView {
             //percent.widthAnchor.constraint(equalToConstant: 44.0).isActive = true
             label.adjustsFontSizeToFitWidth = true
             percent.adjustsFontSizeToFitWidth = true
-            stack.axis = UILayoutConstraintAxis.vertical
+            stack.axis = .vertical
+            stack.alignment = .center
             
             label.text = labels[i]
             percent.text = String(format: "%.1f%%", vals[i])
