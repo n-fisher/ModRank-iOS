@@ -146,7 +146,13 @@ class ModInfoTableViewController: UIViewController, UITableViewDelegate, UITable
             
             let mod = mods[indexPath.row]
             (modInfo.childViewControllers.first as! ModInfoViewController).modInfo = mod
-         
+            
+        case "Stats":
+            guard let modInfo = segue.destination as? UINavigationController else {
+                fatalError("Unexpected destination: \(segue.destination)")
+            }
+            (modInfo.childViewControllers.first as! StatsViewController).mods = mods
+            
         default:
             fatalError("Unexpected Segue Identifier; \(segue.identifier ?? "null")")
         }

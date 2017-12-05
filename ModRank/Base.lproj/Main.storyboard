@@ -96,7 +96,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="oYi-qp-Zke"/>
                     </view>
-                    <navigationItem key="navigationItem" id="oP9-gA-d5s"/>
+                    <navigationItem key="navigationItem" id="oP9-gA-d5s">
+                        <barButtonItem key="rightBarButtonItem" title="Stats" id="7Pg-Iq-rnk">
+                            <connections>
+                                <segue destination="AnP-jb-aFy" kind="showDetail" identifier="Stats" id="vZk-AB-foX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableUI" destination="TqS-Mb-v4B" id="Tlr-nx-RSi"/>
                     </connections>
@@ -106,7 +112,63 @@
             </objects>
             <point key="canvasLocation" x="797.60000000000002" y="-851.42428785607206"/>
         </scene>
-        <!--Mod Title-->
+        <!--Navigation Controller-->
+        <scene sceneID="Vql-OE-deA">
+            <objects>
+                <navigationController id="AnP-jb-aFy" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fto-O3-QrK">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="kaW-7O-sM8" kind="relationship" relationship="rootViewController" id="8r9-EB-AIA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dk8-zs-9iU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1692" y="-851"/>
+        </scene>
+        <!--Stats View Controller-->
+        <scene sceneID="uMQ-Yb-3qJ">
+            <objects>
+                <viewController id="kaW-7O-sM8" customClass="StatsViewController" customModule="ModRank" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uhx-nE-nyB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LGs-Re-sVN" customClass="RadarChartView" customModule="Charts">
+                                <rect key="frame" x="0.0" y="64" width="375" height="272"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eBW-Tm-Rw7" customClass="PieChartView" customModule="Charts">
+                                <rect key="frame" x="0.0" y="335" width="375" height="332"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Obd-sV-GF3"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="BB2-IJ-cLO">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="rxd-ya-7pZ">
+                            <connections>
+                                <action selector="cancel:" destination="kaW-7O-sM8" id="dd6-7m-VXb"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="pie" destination="eBW-Tm-Rw7" id="60c-eu-kJR"/>
+                        <outlet property="radar" destination="LGs-Re-sVN" id="fed-tJ-48Y"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pbi-mb-tvy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2616.8000000000002" y="-851.42428785607206"/>
+        </scene>
+        <!--Mod Info View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ModInfoViewController" customModule="ModRank" customModuleProvider="target" sceneMemberID="viewController">
@@ -173,7 +235,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Mod Title" id="L78-4S-r6X">
+                    <navigationItem key="navigationItem" id="L78-4S-r6X">
                         <barButtonItem key="leftBarButtonItem" title="Back" id="7kY-5Z-hFD">
                             <connections>
                                 <action selector="cancel:" destination="BYZ-38-t0r" id="n2i-Gl-6DZ"/>
@@ -184,14 +246,10 @@
                                 <segue destination="VZH-HA-6Om" kind="unwind" unwindAction="unwindToModListWithSender:" id="Oib-iS-ahI"/>
                             </connections>
                         </barButtonItem>
-                        <connections>
-                            <outlet property="titleView" destination="8bC-Xf-vdC" id="qpl-uD-p8k"/>
-                        </connections>
                     </navigationItem>
                     <connections>
                         <outlet property="modImage" destination="RZq-8T-ETS" id="hmX-9p-Cae"/>
                         <outlet property="modTitle" destination="VHe-Nw-gYu" id="D38-mV-THn"/>
-                        <outlet property="navBar" destination="L78-4S-r6X" id="qSg-03-B7V"/>
                         <outlet property="percentagesView" destination="iQp-8e-evQ" id="szI-cz-PQL"/>
                         <outlet property="saveButton" destination="jkX-tK-tJz" id="iPj-yM-yHN"/>
                         <outlet property="searchBar" destination="GFZ-yJ-3Qa" id="ezT-RN-lol"/>

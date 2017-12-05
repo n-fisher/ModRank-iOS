@@ -18,7 +18,6 @@ class ModInfoViewController: UIViewController, UINavigationControllerDelegate, U
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var modTitle: UILabel!
     @IBOutlet weak var percentagesView: PercentagesView!
-    @IBOutlet weak var navBar: UINavigationItem!
     
     let url = "http://modranker-modrank.a3c1.starter-us-west-1.openshiftapps.com/api/items/:"
     
