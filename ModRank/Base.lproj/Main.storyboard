@@ -6,6 +6,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -137,7 +138,7 @@
                                         <color key="textColor" red="0.91301003886010368" green="0.0" blue="0.0090815503376475669" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView autoresizesSubviews="NO" opaque="NO" contentMode="top" ambiguous="YES" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ZNj-nK-4MY">
+                                    <stackView autoresizesSubviews="NO" opaque="NO" contentMode="top" ambiguous="YES" axis="vertical" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ZNj-nK-4MY">
                                         <rect key="frame" x="0.0" y="56" width="375" height="506"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VHe-Nw-gYu">
@@ -156,7 +157,7 @@
                                                 </accessibility>
                                                 <gestureRecognizers/>
                                             </imageView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="iQp-8e-evQ" customClass="PercentagesView" customModule="ModRank" customModuleProvider="target">
+                                            <stackView opaque="NO" contentMode="center" ambiguous="YES" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="iQp-8e-evQ" customClass="PercentagesView" customModule="ModRank" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="386" width="375" height="120"/>
                                                 <color key="backgroundColor" red="0.5956322862694301" green="0.5956322862694301" blue="0.5956322862694301" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </stackView>
@@ -172,7 +173,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Mod Title" largeTitleDisplayMode="always" id="L78-4S-r6X">
+                    <navigationItem key="navigationItem" title="Mod Title" id="L78-4S-r6X">
                         <barButtonItem key="leftBarButtonItem" title="Back" id="7kY-5Z-hFD">
                             <connections>
                                 <action selector="cancel:" destination="BYZ-38-t0r" id="n2i-Gl-6DZ"/>
@@ -190,6 +191,7 @@
                     <connections>
                         <outlet property="modImage" destination="RZq-8T-ETS" id="hmX-9p-Cae"/>
                         <outlet property="modTitle" destination="VHe-Nw-gYu" id="D38-mV-THn"/>
+                        <outlet property="navBar" destination="L78-4S-r6X" id="qSg-03-B7V"/>
                         <outlet property="percentagesView" destination="iQp-8e-evQ" id="szI-cz-PQL"/>
                         <outlet property="saveButton" destination="jkX-tK-tJz" id="iPj-yM-yHN"/>
                         <outlet property="searchBar" destination="GFZ-yJ-3Qa" id="ezT-RN-lol"/>

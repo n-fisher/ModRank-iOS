@@ -22,7 +22,7 @@ class ModInfoTableViewController: UIViewController, UITableViewDelegate, UITable
         // self.clearsSelectionOnViewWillAppear = false
 
         navigationItem.leftBarButtonItem = editButtonItem
-        
+        navigationItem.leftBarButtonItem?.action = #selector(ModInfoTableViewController.editTableView)
         /*if let savedMods = loadMods() {
             mods = savedMods
             print("Loaded " + String(savedMods.count) + " mods")
@@ -54,6 +54,24 @@ class ModInfoTableViewController: UIViewController, UITableViewDelegate, UITable
         return mods.count
     }
     
+    @IBAction func editTableView (sender:UIBarButtonItem)
+    {
+        if tableUI.isEditing{
+            //listTableView.editing = false;
+            tableUI.setEditing(false, animated: true);
+            navigationItem.leftBarButtonItem?.style = UIBarButtonItemStyle.plain;
+            navigationItem.leftBarButtonItem?.title = "Edit";
+            //listTableView.reloadData();
+        }
+        else{
+            //listTableView.editing = true;
+            tableUI.setEditing(true, animated: true);
+            navigationItem.leftBarButtonItem?.title = "Done";
+            navigationItem.leftBarButtonItem?.style =  UIBarButtonItemStyle.done;
+            //listTableView.reloadData();
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "ModInfoTableViewCell"
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ModInfoTableViewCell else {
@@ -69,15 +87,18 @@ class ModInfoTableViewController: UIViewController, UITableViewDelegate, UITable
         
         return cell
     }
+
+    func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+        mods.swapAt(sourceIndexPath.item, proposedDestinationIndexPath.item)
+        return proposedDestinationIndexPath;
+    }
     
-    /*
     // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
-
+    
     // Override to support editing the table view.
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -90,18 +111,11 @@ class ModInfoTableViewController: UIViewController, UITableViewDelegate, UITable
         }    
     }
 
-    // Override to support rearranging the table view.
-    func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-        mods.swapAt(fromIndexPath.item, to.item)
-    }
-
-    /*
     // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the item to be re-orderable.
         return true
     }
-    */
 
     // MARK: - Navigation
     

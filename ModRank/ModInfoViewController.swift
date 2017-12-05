@@ -18,7 +18,7 @@ class ModInfoViewController: UIViewController, UINavigationControllerDelegate, U
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var modTitle: UILabel!
     @IBOutlet weak var percentagesView: PercentagesView!
-    @IBOutlet weak var navBar: UINavigationBar!
+    @IBOutlet weak var navBar: UINavigationItem!
     
     let url = "http://modranker-modrank.a3c1.starter-us-west-1.openshiftapps.com/api/items/:"
     
@@ -173,6 +173,7 @@ class ModInfoViewController: UIViewController, UINavigationControllerDelegate, U
                 return
         }
         self.searchBar.text = "\(info.id)"
+        self.modTitle.text = "\(info.itemTitle)"
         self.modImage.image = UIImage(data: info.img as Data)
         self.percentagesView.refresh(favs: info.favsPercent, views: info.viewsPercent, unsubs: info.unsubscribesPercent, subs: info.subsPercent, comments: info.commentsPercent)
         updateSaveButtonState()
