@@ -18,6 +18,7 @@ class ModInfoViewController: UIViewController, UINavigationControllerDelegate, U
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var modTitle: UILabel!
     @IBOutlet weak var percentagesView: PercentagesView!
+    @IBOutlet weak var navBar: UINavigationBar!
     
     let url = "http://modranker-modrank.a3c1.starter-us-west-1.openshiftapps.com/api/items/:"
     
@@ -32,8 +33,8 @@ class ModInfoViewController: UIViewController, UINavigationControllerDelegate, U
             updateDisplays()
         }
         
-        updateSaveButtonState()
         searchBar.delegate = self
+        updateSaveButtonState()
     }
     
     override func didReceiveMemoryWarning() {
@@ -70,8 +71,11 @@ class ModInfoViewController: UIViewController, UINavigationControllerDelegate, U
     //MARK: Private Functions
     
     private func updateSaveButtonState() {
+        saveButton.isEnabled = false
         // TODO: Disable the Save button if the text field is empty.
-        saveButton.isEnabled = !(self.modTitle.text?.isEmpty)!
+        if let text = self.searchBar.text {
+            saveButton.isEnabled = !text.isEmpty
+        }
     }
     
     
@@ -121,32 +125,32 @@ class ModInfoViewController: UIViewController, UINavigationControllerDelegate, U
                 if img == nil || img!.isEmpty {
                     img = "https://steamuserimages-a.akamaihd.net/ugc/100600869081028686/995C77B99B7EF5FE58BC696B0C70CB5999502F7C/"
                 }
-                
-                guard let imageData: NSData = NSData(contentsOf: URL(string: img!)!)
-                    else {
-                        return
+                do {
+                    let imageData: Data = try Data(contentsOf: URL(string: img!)!)
+                    DispatchQueue.main.async {
+                        self.updateModInfo(mod: ModInfo(title: jsonResponse!["title"] as! String,
+                                                        id: jsonResponse!["id"] as! Int,
+                                                        itemTitle: jsonResponse!["itemTitle"] as! String,
+                                                        comments: jsonResponse!["comments"] as! Int,
+                                                        subs: jsonResponse!["subs"] as! Int,
+                                                        favs: jsonResponse!["favs"] as! Int,
+                                                        views: jsonResponse!["views"] as! Int,
+                                                        unsubscribes: jsonResponse!["unsubscribes"] as! Float,
+                                                        img: imageData,
+                                                        favsRank: jsonResponse!["favsRank"] as! Int,
+                                                        favsPercent: (jsonResponse!["favsPercent"] as! NSString).floatValue,
+                                                        subsRank: jsonResponse!["subsRank"] as! Int,
+                                                        subsPercent: (jsonResponse!["subsPercent"] as! NSString).floatValue,
+                                                        unsubscribesRank: jsonResponse!["unsubscribesRank"] as! Int,
+                                                        unsubscribesPercent: (jsonResponse!["unsubscribesPercent"] as! NSString).floatValue,
+                                                        viewsRank: jsonResponse!["viewsRank"] as! Int,
+                                                        viewsPercent: (jsonResponse!["viewsPercent"] as! NSString).floatValue,
+                                                        commentsRank: jsonResponse!["commentsRank"] as! Int,
+                                                        commentsPercent: (jsonResponse!["commentsPercent"] as! NSString).floatValue))
+                    }
                 }
-                
-                DispatchQueue.main.async {
-                    self.updateModInfo(mod: ModInfo(title: jsonResponse!["title"] as! String,
-                                                    id: jsonResponse!["id"] as! Int,
-                                                    itemTitle: jsonResponse!["itemTitle"] as! String,
-                                                    comments: jsonResponse!["comments"] as! Int,
-                                                    subs: jsonResponse!["subs"] as! Int,
-                                                    favs: jsonResponse!["favs"] as! Int,
-                                                    views: jsonResponse!["views"] as! Int,
-                                                    unsubscribes: jsonResponse!["unsubscribes"] as! Float,
-                                                    img: imageData,
-                                                    favsRank: jsonResponse!["favsRank"] as! Int,
-                                                    favsPercent: (jsonResponse!["favsPercent"] as! NSString).floatValue,
-                                                    subsRank: jsonResponse!["subsRank"] as! Int,
-                                                    subsPercent: (jsonResponse!["subsPercent"] as! NSString).floatValue,
-                                                    unsubscribesRank: jsonResponse!["unsubscribesRank"] as! Int,
-                                                    unsubscribesPercent: (jsonResponse!["unsubscribesPercent"] as! NSString).floatValue,
-                                                    viewsRank: jsonResponse!["viewsRank"] as! Int,
-                                                    viewsPercent: (jsonResponse!["viewsPercent"] as! NSString).floatValue,
-                                                    commentsRank: jsonResponse!["commentsRank"] as! Int,
-                                                    commentsPercent: (jsonResponse!["commentsPercent"] as! NSString).floatValue))
+                catch {
+                    return
                 }
             }
             else {
@@ -168,8 +172,8 @@ class ModInfoViewController: UIViewController, UINavigationControllerDelegate, U
             else {
                 return
         }
+        self.searchBar.text = "\(info.id)"
         self.modImage.image = UIImage(data: info.img as Data)
-        self.modTitle.text = modInfo?.itemTitle
         self.percentagesView.refresh(favs: info.favsPercent, views: info.viewsPercent, unsubs: info.unsubscribesPercent, subs: info.subsPercent, comments: info.commentsPercent)
         updateSaveButtonState()
     }

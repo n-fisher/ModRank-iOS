@@ -42,7 +42,7 @@ class ModInfo: NSObject, NSCoding {
     var favs: Int
     var views: Int
     var unsubscribes: Float
-    var img: NSData
+    var img: Data
     var favsRank: Int
     var favsPercent: Float
     var subsRank: Int
@@ -56,11 +56,12 @@ class ModInfo: NSObject, NSCoding {
     
     //MARK: Archiving Paths
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
-    static let ArchiveURL = DocumentsDirectory.appendingPathComponent("mods")
+    static let ModURL = DocumentsDirectory.appendingPathComponent("mods")
+    static let ListURL = DocumentsDirectory.appendingPathComponent("modlists")
     
     
     init(title: String, id: Int, itemTitle: String, comments: Int, subs: Int,
-         favs: Int, views: Int, unsubscribes: Float, img: NSData, favsRank: Int,
+         favs: Int, views: Int, unsubscribes: Float, img: Data, favsRank: Int,
          favsPercent: Float, subsRank: Int, subsPercent: Float, unsubscribesRank: Int,
          unsubscribesPercent: Float, viewsRank: Int, viewsPercent: Float,
          commentsRank: Int, commentsPercent: Float) {
@@ -94,7 +95,7 @@ class ModInfo: NSObject, NSCoding {
                   favs: aDecoder.decodeInteger(forKey: PropertyKey.favs),
                   views: aDecoder.decodeInteger(forKey: PropertyKey.views),
                   unsubscribes: aDecoder.decodeFloat(forKey: PropertyKey.unsubscribes),
-                  img: aDecoder.decodeObject(forKey: PropertyKey.img) as! NSData,
+                  img: aDecoder.decodeObject(forKey: PropertyKey.img) as! Data,
                   favsRank: aDecoder.decodeInteger(forKey: PropertyKey.favsRank),
                   favsPercent: aDecoder.decodeFloat(forKey: PropertyKey.favsPercent),
                   subsRank: aDecoder.decodeInteger(forKey: PropertyKey.subsRank),

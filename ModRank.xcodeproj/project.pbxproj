@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0118F9CE1FD5F1D4004CEB71 /* ModListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0118F9CD1FD5F1D4004CEB71 /* ModListTableViewController.swift */; };
+		0118F9D01FD5F1E4004CEB71 /* ModListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0118F9CF1FD5F1E4004CEB71 /* ModListTableViewCell.swift */; };
 		015335151FAFB07200557474 /* ModInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015335141FAFB07200557474 /* ModInfoTableViewController.swift */; };
 		01B745411FAF86E50054318F /* ModInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B745401FAF86E50054318F /* ModInfo.swift */; };
 		01B745431FAF8E730054318F /* ModInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B745421FAF8E730054318F /* ModInfoTableViewCell.swift */; };
@@ -32,6 +34,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0118F9CD1FD5F1D4004CEB71 /* ModListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModListTableViewController.swift; sourceTree = "<group>"; };
+		0118F9CF1FD5F1E4004CEB71 /* ModListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModListTableViewCell.swift; sourceTree = "<group>"; };
 		015335141FAFB07200557474 /* ModInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModInfoTableViewController.swift; sourceTree = "<group>"; };
 		01B745401FAF86E50054318F /* ModInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModInfo.swift; sourceTree = "<group>"; };
 		01B745421FAF8E730054318F /* ModInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModInfoTableViewCell.swift; sourceTree = "<group>"; };
@@ -107,6 +111,8 @@
 				01F88B471FAE871000FAF8CC /* Info.plist */,
 				01B745401FAF86E50054318F /* ModInfo.swift */,
 				01B745441FAF98370054318F /* PercentagesView.swift */,
+				0118F9CD1FD5F1D4004CEB71 /* ModListTableViewController.swift */,
+				0118F9CF1FD5F1E4004CEB71 /* ModListTableViewCell.swift */,
 			);
 			path = ModRank;
 			sourceTree = "<group>";
@@ -355,7 +361,9 @@
 				01B745431FAF8E730054318F /* ModInfoTableViewCell.swift in Sources */,
 				01F88B3E1FAE871000FAF8CC /* ModInfoViewController.swift in Sources */,
 				01B745411FAF86E50054318F /* ModInfo.swift in Sources */,
+				0118F9D01FD5F1E4004CEB71 /* ModListTableViewCell.swift in Sources */,
 				015335151FAFB07200557474 /* ModInfoTableViewController.swift in Sources */,
+				0118F9CE1FD5F1D4004CEB71 /* ModListTableViewController.swift in Sources */,
 				01F88B3C1FAE871000FAF8CC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,9 +9,10 @@
 import UIKit
 import os.log
 
-class ModInfoTableViewController: UITableViewController {
+class ModInfoTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //MARK: Properties
+    @IBOutlet var tableUI: UITableView!
     var mods = [ModInfo]()
 
     override func viewDidLoad() {
@@ -22,17 +23,20 @@ class ModInfoTableViewController: UITableViewController {
 
         navigationItem.leftBarButtonItem = editButtonItem
         
-        if let savedMods = loadMods() {
-            mods += savedMods
+        /*if let savedMods = loadMods() {
+            mods = savedMods
             print("Loaded " + String(savedMods.count) + " mods")
         }
         else {
             os_log("Failed to load mods", log: OSLog.default, type: .error)
-        }
+        }*/
         
         if mods.count == 0 {
             //loadSampleMods()
         }
+        
+        tableUI.delegate = self
+        tableUI.dataSource = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,15 +46,15 @@ class ModInfoTableViewController: UITableViewController {
     
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return mods.count
     }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "ModInfoTableViewCell"
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ModInfoTableViewCell else {
             fatalError("The dequeued cell is not an instance of ModInfoTableViewCell.")
@@ -65,7 +69,7 @@ class ModInfoTableViewController: UITableViewController {
         
         return cell
     }
-
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -75,7 +79,7 @@ class ModInfoTableViewController: UITableViewController {
     */
 
     // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
             mods.remove(at: indexPath.row)
@@ -87,7 +91,7 @@ class ModInfoTableViewController: UITableViewController {
     }
 
     // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+    func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
         mods.swapAt(fromIndexPath.item, to.item)
     }
 
@@ -110,22 +114,25 @@ class ModInfoTableViewController: UITableViewController {
         case "AddItem":
             os_log("Adding a new mod.", log: OSLog.default, type: .debug)
             
+        case "unwind":
+            os_log("Unwinding to lists.", log: OSLog.default, type: .debug)
+            
         case "ShowDetail":
-            guard let modInfoDetailViewController = segue.destination as? UINavigationController else {
+            guard let modInfo = segue.destination as? UINavigationController else {
                 fatalError("Unexpected destination: \(segue.destination)")
             }
             
-            guard let selectedModInfoCell = sender as? ModInfoTableViewCell else {
+            guard let selectedMod = sender as? ModInfoTableViewCell else {
                 fatalError("Unexpected sender: \(sender ?? "null")")
             }
             
-            guard let indexPath = tableView.indexPath(for: selectedModInfoCell) else {
+            guard let indexPath = tableUI.indexPath(for: selectedMod) else {
                 fatalError("The selected cell is not being displayed by the table")
             }
             
-            let selectedMod = mods[indexPath.row]
-            (modInfoDetailViewController.childViewControllers.first as! ModInfoViewController).modInfo = selectedMod
-            
+            let mod = mods[indexPath.row]
+            (modInfo.childViewControllers.first as! ModInfoViewController).modInfo = mod
+         
         default:
             fatalError("Unexpected Segue Identifier; \(segue.identifier ?? "null")")
         }
@@ -135,33 +142,46 @@ class ModInfoTableViewController: UITableViewController {
     @IBAction func unwindToModList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? ModInfoViewController, let modInfo = sourceViewController.modInfo {
             
-            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+            if let selectedIndexPath = tableUI.indexPathForSelectedRow {
                 // Update an existing mod.
                 mods[selectedIndexPath.row] = modInfo
-                tableView.reloadRows(at: [selectedIndexPath], with: .none)
+                tableUI.reloadRows(at: [selectedIndexPath], with: .none)
             }
             else {
                 // Add a new mod.
                 let newIndexPath = IndexPath(row: mods.count, section: 0)
                 
                 mods.append(modInfo)
-                tableView.insertRows(at: [newIndexPath], with: .automatic)
+                tableUI.insertRows(at: [newIndexPath], with: .automatic)
             }
         }
         saveMods()
     }
     
-    //MARK: Private Methods
-    private func loadSampleMods() {        /*
-        let mod1 = ModInfo(title: "title1", id: 1, itemTitle: "itemtitle1", comments: 1, subs: 1, favs: 1, views: 1, unsubscribes: 1, img: "Image1", favsRank: 1, favsPercent: 61.0, subsRank: 1, subsPercent: 71.0, unsubscribesRank: 1, unsubscribesPercent: 1.0, viewsRank: 1, viewsPercent: 1.0, commentsRank: 1, commentsPercent: 1.0)
-        let mod2 = ModInfo(title: "title2", id: 2, itemTitle: "itemtitle2", comments: 2, subs: 2, favs: 2, views: 2, unsubscribes: 2, img: "Image2", favsRank: 2, favsPercent: 2.0, subsRank: 2, subsPercent: 20.0, unsubscribesRank: 200, unsubscribesPercent: 26.0, viewsRank: 32, viewsPercent: 42.0, commentsRank: 2, commentsPercent: 2.0)
-        let mod3 = ModInfo(title: "title3", id: 3, itemTitle: "itemtitle3", comments: 3, subs: 3, favs: 3, views: 3, unsubscribes: 3, img: "Image3", favsRank: 3, favsPercent: 13.0, subsRank: 3, subsPercent: 23.0, unsubscribesRank: 3, unsubscribesPercent: 33.0, viewsRank: 3, viewsPercent: 43.0, commentsRank: 3, commentsPercent: 53.0)
-        
-        mods += [mod1, mod2, mod3]*/
+    
+    
+    //MARK: Actions
+    
+    @IBAction func cancel(_ sender: UIBarButtonItem) {
+        // Depending on style of presentation (modal or push presentation), this view controller needs to be dismissed in two different ways.
+        let isPresentingInAddMode = presentingViewController is UINavigationController
+        if isPresentingInAddMode {
+            dismiss(animated: true, completion: nil)
+        }
+        else if let owningNavigationController = navigationController{
+            owningNavigationController.popViewController(animated: true)
+        }
+        else {
+            fatalError("The ViewController is not inside a navigation controller.")
+        }
     }
     
+    class TableViewController: UITableViewController {
+    }
+    
+    //MARK: Private Methods
     private func saveMods() {
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(mods, toFile: ModInfo.ArchiveURL.path)
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(mods, toFile: ModInfo.ModURL.path)
         if isSuccessfulSave {
             os_log("Mods successfully saved.", log: OSLog.default, type: .debug)
             print(String(format: "(%d mods saved)", (loadMods()?.count)!))
@@ -171,6 +191,6 @@ class ModInfoTableViewController: UITableViewController {
     }
     
     private func loadMods() -> [ModInfo]?  {
-        return NSKeyedUnarchiver.unarchiveObject(withFile: ModInfo.ArchiveURL.path) as? [ModInfo]
+        return NSKeyedUnarchiver.unarchiveObject(withFile: ModInfo.ModURL.path) as? [ModInfo]
     }
 }
