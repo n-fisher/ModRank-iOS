@@ -20,10 +20,19 @@ class StatsViewController: UIViewController, UINavigationControllerDelegate, IVa
         return ""
     }
     
+    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        for mod in mods {
+            if Double(mod.subs) == value {
+                return mod.itemTitle
+            }
+        }
+        return ""
+    }
+    
     //MARK: Properties
     var mods = [ModInfo]()
-    @IBOutlet weak var radar: RadarChartView!
     @IBOutlet weak var pie: PieChartView!
+    @IBOutlet weak var bar: BarChartView!
     
     
     override func viewDidLoad() {
@@ -50,18 +59,20 @@ class StatsViewController: UIViewController, UINavigationControllerDelegate, IVa
     }
     
     func updateRadar() {
-        var dataSet = [RadarChartDataEntry]()
-        for mod in mods {
+        var dataSet = [BarChartDataEntry]()
+        for mod in 0..<mods.count {
             dataSet.append(
-                RadarChartDataEntry(value: Double(mod.subs))
+                BarChartDataEntry(x: Double(mod), y: Double(mods[mod].subs))
             )
         }
-        radar.data = RadarChartData(dataSet: RadarChartDataSet(values: dataSet, label: "Downloads"))
-        radar.data?.setValueFormatter(self as! IValueFormatter)
-        radar.chartDescription?.text = "Downloads"
+        let data = BarChartDataSet(values: dataSet, label: "Downloads")
+        bar.chartDescription?.text = "Downloads"
+        data.valueFormatter = self
+        bar.data = BarChartData(dataSet: data)
+
 
         //This must stay at end of function
-        radar.notifyDataSetChanged()
+        bar.notifyDataSetChanged()
     }
     
     func renderCharts() {

@@ -134,8 +134,13 @@ class ModListTableViewController: UITableViewController {
             let modList = sourceViewController.mods
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 // Update an existing mod.
-                modlists[selectedIndexPath.row] = modList
-                tableView.reloadRows(at: [selectedIndexPath], with: .none)
+                if modList.isEmpty {
+                    modlists.remove(at: selectedIndexPath.row)
+                }
+                else {
+                    modlists[selectedIndexPath.row] = modList
+                }
+                tableView.reloadData()
             }
             else {
                 // Add a new mod.
