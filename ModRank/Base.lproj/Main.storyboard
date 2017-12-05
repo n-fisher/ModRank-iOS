@@ -234,8 +234,20 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bY1-Ud-Ib8" id="aTp-DF-D2d">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="FK0-FW-1YM">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="FK0-FW-1YM" secondAttribute="bottom" id="DjR-dF-DW0"/>
+                                        <constraint firstItem="FK0-FW-1YM" firstAttribute="top" secondItem="aTp-DF-D2d" secondAttribute="top" id="XT6-6g-lac"/>
+                                        <constraint firstAttribute="trailing" secondItem="FK0-FW-1YM" secondAttribute="trailing" id="XbE-Hn-Qmx"/>
+                                        <constraint firstItem="FK0-FW-1YM" firstAttribute="leading" secondItem="aTp-DF-D2d" secondAttribute="leading" id="Y7x-B9-hwf"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="cell" destination="FK0-FW-1YM" id="2U5-P5-UTm"/>
                                     <segue destination="5it-Gj-JYP" kind="showDetail" identifier="ShowDetail" id="Jpj-Mh-0Yt"/>
                                 </connections>
                             </tableViewCell>

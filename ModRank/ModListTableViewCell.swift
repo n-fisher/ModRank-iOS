@@ -12,6 +12,7 @@ import UIKit
 class ModListTableViewCell: UITableViewCell {
     
     var modList: [ModInfo]?
+    @IBOutlet weak var cell: UIStackView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,7 +24,7 @@ class ModListTableViewCell: UITableViewCell {
     func refresh() {
         
         // Clear subviews
-        for i in subviews {
+        for i in cell.subviews {
             i.removeFromSuperview()
         }
         
@@ -32,15 +33,12 @@ class ModListTableViewCell: UITableViewCell {
                 return
         }
         
-        let stack = UIStackView()
-        stack.axis = .horizontal
+        cell.axis = .horizontal
+        cell.autoresizesSubviews = true
         for mod in mods {
             let img = UIImageView(image: UIImage(data: mod.img))
-            img.contentMode = .scaleAspectFit
-            
-            stack.addSubview(img)
+            cell.addArrangedSubview(img)
         }
-        addSubview(stack)
     }
 }
 
